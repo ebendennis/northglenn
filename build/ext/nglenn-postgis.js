@@ -131,7 +131,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward1Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
@@ -160,7 +160,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward2Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
@@ -189,7 +189,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward3Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
@@ -218,7 +218,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward4Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
