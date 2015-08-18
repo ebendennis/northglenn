@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Northglenn Stormwater</title>
+<meta name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<style>
+</style>
+</head>
+<body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <div id="main" class = "col-md-3">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home" id="home-button" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Select a Ward<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#ward1" id="ward1-button" aria-controls="home" role="tab" data-toggle="tab">Ward 1</a></li>
+                <li><a href="#ward2" id="ward2-button" aria-controls="home" role="tab" data-toggle="tab">Ward 2</a></li>
+                <li><a href="#ward3" id="ward3-button" aria-controls="home" role="tab" data-toggle="tab">Ward 3</a></li>
+                <li><a href="#ward4" id="ward4-button" aria-controls="home" role="tab" data-toggle="tab">Ward 4</a></li>
+            </ul>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content narrative">
+        <div role="tabpanel" class="tab-pane fade in active" id="home"><!-- @import "../markdown/home.html" --></div>
+        <div role="tabpanel" class="tab-pane fade" id="ward1"><!-- @import "../markdown/ward1.html" --></div>
+        <div role="tabpanel" class="tab-pane fade" id="ward2"><!-- @import "../markdown/ward2.html" --></div>
+        <div role="tabpanel" class="tab-pane fade" id="ward3"><!-- @import "../markdown/ward3.html" --></div>
+        <div role="tabpanel" class="tab-pane fade" id="ward4"><!-- @import "../markdown/ward4.html" --></div>
+      </div>
+  </div>
+
+  <div id ="titleBlock"><h4>Northglenn Stormwater Inventory</h4></div>
+  <div id="map"></div>
+  <div id ="footerBlock"><div><a href="http://iconeng.com"><i class="fa fa-copyright"></i> ICON Engineering 2015</a><i class="fa fa-github-alt padded"></i><i class="fa fa-linkedin-square padded"></i></div></div>
+
+  <div id="sidebar" class="col-md-3">
+    <div id="layerMenu">
+      <p><b>Map Features</b></p>
+      <a class="active" id="issuesLayer" href="#">Issues</a>
+      <a class="active" id="boundsLayer" href="#">Wards</a>
+      <a class="" id="basinsLayer" href="#">HUC-12 Basins</a>
+      <a class="" id="sfhaLayer" href="#">SFHA</a>
+      <a class="" id="contoursLayer" href="#">Contours</a>
+      <div class="source">
+        <small>Source:<a class="attrib" href="http://www.iconeng.com">Data &copy; ICON Engineering; </a><a class="attrib" href='https://www.mapbox.com/about/maps/' target='_blank'>Maps &copy; Mapbox &copy; OpenStreetMap</a></small>
+      </div>
+    </div>
+    <div id='info' class='info'></div>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="ext/vendor/jquery.ui.widget.js"></script>
+<script src="ext/nglenn-clicks-min.js"></script>
+<script src="ext/nglenn-postgis-min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="250px" height="351px" viewBox="0 0 250 351" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>red_marker copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="27.6065672%" x2="0%" y2="27.6065677%" id="linearGradient-1">
+            <stop stop-color="#E64156" offset="0%"></stop>
+            <stop stop-color="#9D2634" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M226.702161,332.923471 C262.524606,339.142134 248.866482,344.574084 239.098523,345.890585 C229.330563,347.207086 228.409373,347.15273 219.491891,347.368899 C210.574408,347.585067 100,350 100,350 C100,350 128.794658,333.339014 131.397417,332.075975 C134.000177,330.812935 130.80679,330.76607 142.722836,329.160069 C154.638882,327.554069 190.879716,326.704807 226.702161,332.923471 L226.702161,332.923471 Z" id="Path-1" fill-opacity="0.6" fill="#191919" sketch:type="MSShapeGroup"></path>
+        <path d="M100.000002,350 L189.510627,147.157213 C179.656307,167.224925 112.140339,322.35437 100,350 C100,326.883606 100,16.9400777 100,0 C155.228475,0 200,45.5524237 200,101.744186 C200,118.064454 196.223312,133.487244 189.510638,147.157189 L100.000002,350 Z" id="Triangle-1-Copy-Copy" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+        <path d="M2.41385637e-06,350 L89.5106268,147.157213 C79.6563071,167.224925 12.1403388,322.35437 1.92841317e-10,350 C1.15070833e-07,326.883606 -5.439432e-09,16.9400777 1.92841317e-10,0 C55.228475,0 100,45.5524237 100,101.744186 C100,118.064454 96.2233116,133.487244 89.5106378,147.157189 L2.41385637e-06,350 Z" id="Triangle-1-Copy-Copy-2" fill="#E64156" sketch:type="MSShapeGroup" transform="translate(50.000000, 175.000000) scale(-1, 1) translate(-50.000000, -175.000000) "></path>
+    </g>
+</svg>

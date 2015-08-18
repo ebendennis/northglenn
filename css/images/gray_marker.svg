@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="253px" height="351px" viewBox="0 0 253 351" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>gray_marker</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="27.6065672%" x2="0%" y2="27.6065677%" id="linearGradient-1">
+            <stop stop-color="#D8D8D8" offset="0%"></stop>
+            <stop stop-color="#767676" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M229.702161,332.923471 C265.524606,339.142134 251.866482,344.574084 242.098523,345.890585 C232.330563,347.207086 231.409373,347.15273 222.491891,347.368899 C213.574408,347.585067 103,350 103,350 C103,350 131.794658,333.339014 134.397417,332.075975 C137.000177,330.812935 133.80679,330.76607 145.722836,329.160069 C157.638882,327.554069 193.879716,326.704807 229.702161,332.923471 L229.702161,332.923471 Z" id="Path-1" fill-opacity="0.6" fill="#191919" sketch:type="MSShapeGroup"></path>
+        <path d="M103.000002,350 L192.510627,147.157213 C182.656307,167.224925 115.140339,322.35437 103,350 C103,326.883606 103,16.9400777 103,0 C158.228475,0 203,45.5524237 203,101.744186 C203,118.064454 199.223312,133.487244 192.510638,147.157189 L103.000002,350 Z" id="Triangle-1-Copy-Copy" fill="url(#linearGradient-1)" sketch:type="MSShapeGroup"></path>
+        <path d="M3.00000241,350 L92.5106268,147.157213 C82.6563071,167.224925 15.1403388,322.35437 3,350 C3.00000012,326.883606 2.99999999,16.9400777 3,0 C58.228475,0 103,45.5524237 103,101.744186 C103,118.064454 99.2233116,133.487244 92.5106378,147.157189 L3.00000241,350 Z" id="Triangle-1-Copy-Copy-2" fill="#D8D8D8" sketch:type="MSShapeGroup" transform="translate(53.000000, 175.000000) scale(-1, 1) translate(-53.000000, -175.000000) "></path>
+    </g>
+</svg>
