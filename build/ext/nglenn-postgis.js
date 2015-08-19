@@ -68,13 +68,12 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
 
   function boundsStyle(feature) {
        switch (feature.properties.ward) {
-         case 1: return {fillColor: '#ff91ff',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 2: return {fillColor: '#dd0000',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 3: return {fillColor: '#ffd92f',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 4: return {fillColor: '#a65628',fillOpacity: 0.25,color:'#fff', weight:2.5};
+         case 1: return {fillColor: '#ff91ff',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 2: return {fillColor: '#dd0000',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 3: return {fillColor: '#ffd92f',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 4: return {fillColor: '#a65628',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
        }
        return {
-         fillOpacity: 0.9
        };
      }
 
@@ -84,18 +83,23 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
              fillOpacity: 0.1,
              fillColor: '#eee',
              color: 'hotpink',
-             opacity:.5
+             opacity:.5,
+             clickable:false
            };
          }
 
   function sfhaStyle(feature) {
     switch (feature.properties.zone_subty) {
-      case 'FLOODWAY': return {fillColor: '#0033ff',fillOpacity: 0.6,color:'#eee', weight:0.5};
-      case '0.2 PCT ANNUAL CHANCE FLOOD HAZARD': return {fillColor: '#ffaa00',fillOpacity: 0.6,color:'#fff', weight:0.5};
+      case 'FLOODWAY': return {fillColor: '#0033ff',fillOpacity: 0.6,color:'#eee', weight:0.5, className:'floodway', clickable:false};
+      case '0.2 PCT ANNUAL CHANCE FLOOD HAZARD': return {fillColor: '#ffaa00',fillOpacity: 0.6,color:'#fff', weight:0.5, clickable:false};
     }
     return {
-      fillColor: '#00aaff',fillOpacity: 0.6,color:'#eee', weight:0.5,
-      fillOpacity: 0.6
+      fillColor: '#00aaff',
+      fillOpacity: 0.6,
+      color:'#eee',
+      weight:0.5,
+      fillOpacity: 0.6,
+      clickable:false
     };
           }
 
