@@ -38,10 +38,10 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
       sfhaQuery= "SELECT * FROM northglenn_sfha";
       huc12Query= "SELECT * FROM northglenn_huc12";
       boundsQuery= "SELECT * FROM northglenn_bounds";
-      ward1Query= "SELECT * FROM northglenn_issues WHERE (ward=1)";
-      ward2Query= "SELECT * FROM northglenn_issues WHERE (ward=2)";
-      ward3Query= "SELECT * FROM northglenn_issues WHERE (ward=3)";
-      ward4Query= "SELECT * FROM northglenn_issues WHERE (ward=4)";
+      ward1Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 1 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward2Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 2 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward3Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 3 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward4Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 4 AND ST_Intersects(r.the_geom, m.the_geom)";
 
     redIcon = L.icon({
       iconUrl: 'css/images/red_marker.svg',
