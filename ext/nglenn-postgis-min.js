@@ -43,14 +43,14 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
       ward3Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 3 AND ST_Intersects(r.the_geom, m.the_geom)";
       ward4Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 4 AND ST_Intersects(r.the_geom, m.the_geom)";
 
-    redIcon = L.icon({
-      iconUrl: 'css/images/red_marker.svg',
-      iconSize: [37.5,52.5],
-      iconAnchor: [15,52.5],
-      popupAnchor: [0,-52]
+    blueIcon = L.icon({
+      iconUrl: 'css/images/blue_marker.svg',
+      iconSize: [25,35],
+      iconAnchor: [10,35],
+      popupAnchor: [0,-35]
   });
 
-    nullIcon = L.icon({
+    greenIcon = L.icon({
       iconUrl: 'css/images/green_marker.svg',
       iconSize: [25,35],
       iconAnchor: [10,35],
@@ -116,7 +116,8 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+pointsQuery, function(data) {
       cartoDBPoints = L.geoJson(data,{
         pointToLayer: function(feature,latlng){
-          var marker = L.marker(latlng,{icon:nullIcon});
+          var marker = L.marker(latlng,{icon:greenIcon});
+            if (feature.properties.priority <= 2) {marker.setIcon(blueIcon)}
           var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
           marker.on('click',function(e){
             marker.closePopup();
