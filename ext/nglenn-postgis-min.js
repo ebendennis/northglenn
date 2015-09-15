@@ -118,7 +118,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
         pointToLayer: function(feature,latlng){
           var marker = L.marker(latlng,{icon:greenIcon});
             if (feature.properties.priority <= 2) {marker.setIcon(blueIcon)}
-          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           marker.on('click',function(e){
             marker.closePopup();
             info.innerHTML = content;
@@ -143,7 +143,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
         onEachFeature: function(feature,layer){
           var item = markerList1.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -172,7 +172,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
         onEachFeature: function(feature,layer){
           var item = markerList2.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -201,7 +201,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
         onEachFeature: function(feature,layer){
           var item = markerList3.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -230,7 +230,7 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
         onEachFeature: function(feature,layer){
           var item = markerList4.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
