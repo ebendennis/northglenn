@@ -116,8 +116,8 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+pointsQuery, function(data) {
       cartoDBPoints = L.geoJson(data,{
         pointToLayer: function(feature,latlng){
-          var marker = L.marker(latlng,{icon:greenIcon});
-            if (feature.properties.priority <= 2) {marker.setIcon(blueIcon)}
+          var marker = L.marker(latlng,{icon:blueIcon});
+            if (feature.properties.priority <= 2) {marker.setIcon(greenIcon)}
           var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           marker.on('click',function(e){
             marker.closePopup();
