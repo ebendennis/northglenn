@@ -38,19 +38,19 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
       sfhaQuery= "SELECT * FROM northglenn_sfha";
       huc12Query= "SELECT * FROM northglenn_huc12";
       boundsQuery= "SELECT * FROM northglenn_bounds";
-      ward1Query= "SELECT * FROM northglenn_issues WHERE (ward=1)";
-      ward2Query= "SELECT * FROM northglenn_issues WHERE (ward=2)";
-      ward3Query= "SELECT * FROM northglenn_issues WHERE (ward=3)";
-      ward4Query= "SELECT * FROM northglenn_issues WHERE (ward=4)";
+      ward1Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 1 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward2Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 2 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward3Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 3 AND ST_Intersects(r.the_geom, m.the_geom)";
+      ward4Query= "SELECT ST_Intersection(r.the_geom, m.the_geom) AS intersection_geom, r.* FROM northglenn_issues AS r, northglenn_bounds AS m WHERE m.ward = 4 AND ST_Intersects(r.the_geom, m.the_geom)";
 
-    redIcon = L.icon({
-      iconUrl: 'css/images/red_marker.svg',
-      iconSize: [37.5,52.5],
-      iconAnchor: [15,52.5],
-      popupAnchor: [0,-52]
+    blueIcon = L.icon({
+      iconUrl: 'css/images/blue_marker.svg',
+      iconSize: [25,35],
+      iconAnchor: [10,35],
+      popupAnchor: [0,-35]
   });
 
-    nullIcon = L.icon({
+    greenIcon = L.icon({
       iconUrl: 'css/images/green_marker.svg',
       iconSize: [25,35],
       iconAnchor: [10,35],
@@ -68,13 +68,12 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
 
   function boundsStyle(feature) {
        switch (feature.properties.ward) {
-         case 1: return {fillColor: '#ff91ff',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 2: return {fillColor: '#dd0000',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 3: return {fillColor: '#ffd92f',fillOpacity: 0.25,color:'#fff', weight:2.5};
-         case 4: return {fillColor: '#a65628',fillOpacity: 0.25,color:'#fff', weight:2.5};
+         case 1: return {fillColor: '#ff91ff',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 2: return {fillColor: '#dd0000',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 3: return {fillColor: '#ffd92f',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
+         case 4: return {fillColor: '#a65628',fillOpacity: 0.25,color:'#fff', weight:2.5, clickable:false};
        }
        return {
-         fillOpacity: 0.9
        };
      }
 
@@ -84,18 +83,23 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
              fillOpacity: 0.1,
              fillColor: '#eee',
              color: 'hotpink',
-             opacity:.5
+             opacity:.5,
+             clickable:false
            };
          }
 
   function sfhaStyle(feature) {
     switch (feature.properties.zone_subty) {
-      case 'FLOODWAY': return {fillColor: '#0033ff',fillOpacity: 0.6,color:'#eee', weight:0.5};
-      case '0.2 PCT ANNUAL CHANCE FLOOD HAZARD': return {fillColor: '#ffaa00',fillOpacity: 0.6,color:'#fff', weight:0.5};
+      case 'FLOODWAY': return {fillColor: '#0033ff',fillOpacity: 0.6,color:'#eee', weight:0.5, className:'floodway', clickable:false};
+      case '0.2 PCT ANNUAL CHANCE FLOOD HAZARD': return {fillColor: '#ffaa00',fillOpacity: 0.6,color:'#fff', weight:0.5, clickable:false};
     }
     return {
-      fillColor: '#00aaff',fillOpacity: 0.6,color:'#eee', weight:0.5,
-      fillOpacity: 0.6
+      fillColor: '#00aaff',
+      fillOpacity: 0.6,
+      color:'#eee',
+      weight:0.5,
+      fillOpacity: 0.6,
+      clickable:false
     };
           }
 
@@ -112,8 +116,9 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+pointsQuery, function(data) {
       cartoDBPoints = L.geoJson(data,{
         pointToLayer: function(feature,latlng){
-          var marker = L.marker(latlng,{icon:nullIcon});
-          var content = '<div><h4>' + feature.properties.cartodb_id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var marker = L.marker(latlng,{icon:blueIcon});
+            if (feature.properties.priority <= 2) {marker.setIcon(greenIcon)}
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           marker.on('click',function(e){
             marker.closePopup();
             info.innerHTML = content;
@@ -131,14 +136,14 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward1Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
         onEachFeature: function(feature,layer){
           var item = markerList1.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.cartodb_id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -160,14 +165,14 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward2Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
         onEachFeature: function(feature,layer){
           var item = markerList2.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.cartodb_id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -189,14 +194,14 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward3Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
         onEachFeature: function(feature,layer){
           var item = markerList3.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.cartodb_id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();
@@ -218,14 +223,14 @@ L.mapbox.accessToken = 'pk.eyJ1IjoiZWJlbmRlbm5pcyIsImEiOiJ1M2tMMC0wIn0.HL9nr43Jr
     };
     emptyMarkers();
     $.getJSON("https://"+cartoDBUsername+".cartodb.com/api/v2/sql?format=GeoJSON&q="+ward4Query, function(data) {
-      cartoDBPoints = L.geoJson(data,{
+      wardPoints = L.geoJson(data,{
         pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, circleStyle);
       },
         onEachFeature: function(feature,layer){
           var item = markerList4.appendChild(document.createElement('li'));
           item.innerHTML = layer.toGeoJSON().properties.location;
-          var content = '<div><h4>' + feature.properties.cartodb_id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '</div>';
+          var content = '<div><h4>' + feature.properties.id + '. ' + feature.properties.location + '</h4><small>' + feature.properties.lat + ', ' + feature.properties.long + '</small><br /><b>Concern Type: </b>' + feature.properties.type + '<br /><b>Fix Type: </b>' + feature.properties.fixtype + '<br /><b>Reported Concern: </b>' + feature.properties.concern + '<br /><b>Actual Concern: </b>' + feature.properties.actual + '<br /><b>Fix: </b>' + feature.properties.fix + '<br /><b>Priority Rating: </b>' + feature.properties.priority + '</div>';
           item.onclick = function(e){
             map.setView(layer.getLatLng(), 18);
             layer.closePopup();

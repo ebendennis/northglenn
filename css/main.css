@@ -31,7 +31,7 @@ body b {
   width: 340px;
   padding-right: 10px;
   background: transparent;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 #titleBlock {
   position: fixed;
@@ -135,7 +135,7 @@ body b {
   width: 269px;
   border-left: 4px solid #556270;
   background: #fcfcfa;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .info div {
   padding: 10px 10px 10px 6px;
